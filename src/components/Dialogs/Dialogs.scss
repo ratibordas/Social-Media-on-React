@@ -1,0 +1,15 @@
+
+.dialogs {
+    grid-column: span 10;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+         
+         .dialogs__contact {
+              grid-column: span 2;
+              border-right: 1px solid black;
+          }
+
+           .dialogs__messages {
+               grid-column: span 4;
+          }
+}

@@ -1,0 +1,14 @@
+@import "./_reset.scss";
+
+
+.container {
+ display: grid;
+ grid-template-columns: repeat(12, 1fr);
+ grid-template-rows: 3rem 1fr;
+ margin-right: auto;
+ margin-left: auto;
+ width: 80%;
+
+ 
+
+}
