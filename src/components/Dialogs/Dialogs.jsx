@@ -2,36 +2,33 @@ import React from 'react';
 import Contact from './Contact/Contact';
 import "./Dialogs.scss";
 import Message from './Message/Message';
-import {updateNewMessageActionCreator, sendMessageActionCreator} from '../../store/state'
+
 
 
 
 const Dialogs = (props) => {
 
-// Data
-    const store = props.store;
-    const dialogsPage = props.store._state.dialogsPage;
 
-
-    
+   console.log(props)
     // Mapping
-    let dialogsElements = dialogsPage.dialogsData.map((contact) => {
+   
+    let dialogsElements = props.dialogsData.map((contact) => {
         return <Contact key={contact.id} name={contact.name} id={contact.id} />
     });
 
     
-    let messagesElements = dialogsPage.messagesData.map((message) => {
+    let messagesElements = props.messagesData.map((message) => {
           return <Message key={message.id} id={message.id} text={message.text} />
     })
 
     // Actions
     
     const onSendMessage = () => {
-        store.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
     
-    const addMessage = (e) => {
-        store.dispatch(updateNewMessageActionCreator(e.target.value))
+    const onAddMessage = (e) => {
+        props.addMessage(e.target.value)
     }
 
 
@@ -49,7 +46,7 @@ const Dialogs = (props) => {
                    {messagesElements}        
                 </ul>
                 <div className="dialogs__messages__textarea">
-                    <textarea   onChange={addMessage} value={dialogsPage.newMessageText}></textarea>
+                    <textarea   onChange={onAddMessage} value={props.newMessageText}></textarea>
                     <button  onClick={onSendMessage}>Send</button>
                  </div>
 

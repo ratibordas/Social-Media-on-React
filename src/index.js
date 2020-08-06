@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App.jsx';
 import * as serviceWorker from './serviceWorker';
-// import { store } from "../../store/store"
-import  store from "./store/state"
+import  store   from "./store/store"
+// import  store from "./store/state"
 
 
 let rerender = (state) => {
@@ -14,7 +14,10 @@ let rerender = (state) => {
 
 rerender(store.getState());
 
-store.subscribe(rerender)
+store.subscribe(() => {
+    let state = store.getState()
+    rerender(state)
+})
 
 
 serviceWorker.unregister();

@@ -52,47 +52,17 @@ let store = {
    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
    this._callSubscriber(this._state);
 
-  //   switch (action.type) {
-      
-  //     case "ADD_POST": 
-  //       let newPost = {
-  //         id: Math.random(1 * 10),
-  //         text: this._state.profilePage.newPostText,
-  //         likeCounts: 0
-  //       }
-  //       this._state.profilePage.postsData.push(newPost);
-  //       this._state.profilePage.newPostText = ""
-  //       this._callSubscriber(this._state);
-      
-  //       break; 
-      
-  //     case "UPDATE_POST":
-  //       this._state.profilePage.newPostText = action.newText;
-  //       this._callSubscriber(this._state);
-      
-  //       break;
-  //     case "UPDATE_NEW_MESSAGE":
-  //       this._state.dialogsPage.newMessageText = action.newMessageText
-  //       this._callSubscriber(this._state);
-  //       break;
-  //     case "SEND_MESSAGE":
-  //       let messageBody = this._state.dialogsPage.newMessageText;
-  //       this._state.dialogsPage.newMessageText = "";
-  //       this._state.dialogsPage.messagesData.push({
-  //       id: Math.random(1 * 10),
-  //       text: messageBody
-  //     })
-  //       this._callSubscriber(this._state);
-  //       break;
-  //     default:
-  //       return this._state
-  // }
   },
   subscribe(observer) {
     this._callSubscriber = observer
   }
 
 }
+
+
+
+
+
 
 
 // action types

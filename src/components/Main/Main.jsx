@@ -1,18 +1,21 @@
 import React from 'react';
 import "./Main.scss";
 
-import Posts from './Posts/Posts';
+import PostsContainer from './Posts/PostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Main = (props) => {
 
-   
+    
     return (
         <main className="main">
           <ProfileInfo/>
-            <Posts postsData={props.postsData}
-                newPostText={props.newPostText}
-                dispatch={props.dispatch}/>
+            <PostsContainer
+                // postsData={props.postsData}
+                // newPostText={props.newPostText}
+                // dispatch={props.dispatch}
+                store={props.store}
+            />
         </main>
     )
 }
