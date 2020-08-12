@@ -1,9 +1,9 @@
 
-// Action types
+// ACTION TYPES
 const SEND_MESSAGE = "SEND_MESSAGE";
 const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
 
-
+// DATA
 let initialState = {
      dialogsData: [{
           id: 1,
@@ -29,35 +29,44 @@ let initialState = {
 }
 
 
-
+ 
 
 
  const dialogsReducer = (state = initialState, action) => {
+   
+  
+   
 
      switch (action.type) {
-      // upd message into Dialogs Page
+      // UPD MESSAGE INTO DIALOGS PAGE
        case UPDATE_NEW_MESSAGE:
-        state.newMessageText = action.newMessageText
        
-         break;
-       // send message from Dialogs Page
-      case SEND_MESSAGE:
-        let messageBody = state.newMessageText;
-        state.newMessageText = "";
-        state.messagesData.push({
-        id: Math.random(1 * 10),
-        text: messageBody
-      })
-       
-        break;
+       // create and return new state obj right away
+         return {
+           ...state,
+           newMessageText: action.newMessageText,
+            
+         }
+   
+       // SEND MESSAGE FROM DIALOGS PAGE
+       case SEND_MESSAGE: 
+         let messageBody = state.newMessageText;
+    
+         // create and return new state obj right away
+         return {
+           ...state,
+           newMessageText: "",
+           messagesData: [...state.messagesData,{id: Math.random(1 * 10),text: messageBody}]
+         }
+ 
       default:
         return state
      }
-     return state;
+     
   }
 
 
-// Action creators
+ // ACTION CREATORS
 export const updateNewMessageActionCreator = (text) => {
     return {
       type: UPDATE_NEW_MESSAGE,

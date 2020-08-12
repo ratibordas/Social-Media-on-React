@@ -10,12 +10,7 @@ const Main = (props) => {
     return (
         <main className="main">
           <ProfileInfo/>
-            <PostsContainer
-                // postsData={props.postsData}
-                // newPostText={props.newPostText}
-                // dispatch={props.dispatch}
-                store={props.store}
-            />
+            <PostsContainer />
         </main>
     )
 }

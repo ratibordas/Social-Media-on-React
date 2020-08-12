@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // Components
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import Sidebar from '../Sidebar/Sidebar';
+import SidebarContainer from '../Sidebar/SidebarContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 
 
@@ -20,17 +20,14 @@ const App = (props) => {
     <Router>
       <section className="container">
         <Header />
-        <Sidebar dialogsData={props.state.dialogsPage.dialogsData} />
+        <SidebarContainer/>
         <Switch>
           <Route path="/" exact >
-            <Main store={props.store} />
+            <Main />
           </Route>
           <Route path="/dialogs" >
-            {/* <Dialogs dialogsData={props.state.dialogsPage.dialogsData}
-              messagesData={props.state.dialogsPage.messagesData}
-              newMessageText={props.state.dialogsPage.newMessageText}
-              dispatch={props.dispatch} /> */}
-             <DialogsContainer store={props.store} />
+         
+             <DialogsContainer/>
           </Route>
         </Switch>
 
@@ -41,3 +38,6 @@ const App = (props) => {
 }
 
 export default App;
+
+
+ 

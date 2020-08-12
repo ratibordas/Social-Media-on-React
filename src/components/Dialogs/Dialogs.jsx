@@ -1,5 +1,5 @@
 import React from 'react';
-import Contact from './Contact/Contact';
+import Contact from './Contact/Contact'
 import "./Dialogs.scss";
 import Message from './Message/Message';
 
@@ -9,7 +9,7 @@ import Message from './Message/Message';
 const Dialogs = (props) => {
 
 
-   console.log(props)
+   
     // Mapping
    
     let dialogsElements = props.dialogsData.map((contact) => {
