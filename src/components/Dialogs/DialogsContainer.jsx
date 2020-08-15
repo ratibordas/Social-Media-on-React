@@ -4,36 +4,6 @@ import { connect } from 'react-redux';
 
 
 
-// const DialogsContainer = (props) => {
-
-  
-// let state = props.store.getState();
-    
-  
-
-   
-    
-//     const onSendMessage = () => {
-//         props.store.dispatch(sendMessageActionCreator())
-//     }
-    
-//     const addMessage = (text) => {
-//         props.store.dispatch(updateNewMessageActionCreator(text))
-//     }
-
-
-//     return (
-//         <Dialogs addMessage={addMessage}
-//             sendMessage={onSendMessage}
-//             newMessageText={state.dialogsPage.newMessageText}
-//             dialogsData={state.dialogsPage.dialogsData}
-//             messagesData={state.dialogsPage.messagesData}
-
-
-//         />
-//     )
-
-// }
 
 
 

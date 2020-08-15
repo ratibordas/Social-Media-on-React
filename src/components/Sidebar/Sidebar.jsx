@@ -16,7 +16,8 @@ const Sidebar = (props) => {
         <aside className="sidebar">
             <ul>
                 <Link to="/"><li>Profile</li></Link>
-                <Link to="/dialogs"><li>Dialogs</li></Link>      
+                <Link to="/dialogs"><li>Dialogs</li></Link>  
+                 <Link to="/users"><li>Users</li></Link>  
             </ul>
             
             <div className="sidebar__friends">

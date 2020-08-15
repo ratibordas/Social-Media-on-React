@@ -9,6 +9,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import SidebarContainer from '../Sidebar/SidebarContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
+import UsersContainer from '../Users/UsersContainer';
 
 
 
@@ -26,8 +27,10 @@ const App = (props) => {
             <Main />
           </Route>
           <Route path="/dialogs" >
-         
              <DialogsContainer/>
+          </Route>
+          <Route path="/users">
+             <UsersContainer/>
           </Route>
         </Switch>
 
