@@ -10,31 +10,7 @@ const SET_USERS = "SET_USERS"
 
 // DATA
 let initialState = {
-    usersData: [{
-            id: 1,
-            fullName: "Ratiborka",
-            status: "Enable for work",
-            avatar: avatar,
-            follow: true,
-            location: {
-                town: "Krasnodar",
-                country: "Russia"
-            },
-
-
-        },
-        {
-            id: 2,
-            fullName: "Sasha",
-            status: "Wathing Queer Eye",
-            avatar: avatar,
-            follow: false,
-            location: {
-                town: "LA",
-                country: "USA"
-            },
-        }
-    ]
+    users: []
 
 }
 
@@ -47,7 +23,7 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW_USER:
             return {
                 ...state,
-                usersData: state.usersData.map(user => {
+                users: state.users.map(user => {
                     if (user.id === action.userId) {
                         return {
                             ...user,
@@ -60,7 +36,7 @@ const usersReducer = (state = initialState, action) => {
             case UNFOLLOW_USER:
                 return {
                     ...state,
-                    usersData: state.usersData.map(user => {
+                    users: state.users.map(user => {
                         if (user.id === action.userId) {
                             return {
                                 ...user,
@@ -71,7 +47,7 @@ const usersReducer = (state = initialState, action) => {
                     })
                 }
         case SET_USERS:
-            return {...state, usersData: [...state.userData, ...action.usersData]}
+            return {...state, users: [...state.users, ...action.users]}
                 default:
                     return state;
     }
