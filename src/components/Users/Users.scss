@@ -1,0 +1,15 @@
+
+.users__pagination {
+    list-style: none;
+    .users__pagination__item {
+        margin-right: 0.5rem;
+        display: inline;
+    }
+}
+
+
+.selected {
+    font-weight: 800;
+    color: red;
+    font-size: large;
+}
