@@ -20,7 +20,7 @@ let initialState = {
 
 
 
-
+// REDUCER
 const usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -69,40 +69,40 @@ const usersReducer = (state = initialState, action) => {
 
 // ACTION CREATORS
 
-export const followActionCreator = (userId) => {
+export const follow = (userId) => {
     return {
         type: FOLLOW_USER,
         userId
     }
 }
-export const unfollowActionCreator = (userId) => {
+export const unfollow = (userId) => {
     return {
         type: UNFOLLOW_USER,
         userId
     }
 }
 
-export const setUsersActionCreator = (users) => {
+export const setUsers = (users) => {
     return {
         type: SET_USERS,
         users
     }
 }
 
-export const setCurrentPageActionCreator = (currentPage) => {
+export const setCurrentPage = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     }
 }
 
-export const setUsersTotalCountActionCreator = (totalUsersCount) => {
+export const setUsersTotalCount = (totalUsersCount) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalUsersCount
     }
 }
-export const isFetchingActionCreator = (isFetching) => {
+export const isFetching = (isFetching) => {
     return {
         type: IS_FETCHING,
         isFetching
