@@ -6,10 +6,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // Components
 import Header from '../Header/Header';
-import Main from '../Main/Main';
 import SidebarContainer from '../Sidebar/SidebarContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import UsersContainer from '../Users/UsersContainer';
+import ProfileContainer from '../Profile/ProfileContainer';
 
 
 
@@ -23,8 +23,8 @@ const App = (props) => {
         <Header />
         <SidebarContainer/>
         <Switch>
-          <Route path="/" exact >
-            <Main />
+          <Route path="/profile/:userId?"  >
+            <ProfileContainer />
           </Route>
           <Route path="/dialogs" >
              <DialogsContainer/>

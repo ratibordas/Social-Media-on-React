@@ -1,6 +1,7 @@
 // ACTION TYPES
 const ADD_POST = "ADD_POST";
 const UPDATE_POST = "UPDATE_POST";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 // DATA
 let initialState = {
@@ -9,12 +10,13 @@ let initialState = {
         text: "Hi, I am tired",
         likeCounts: 0
     }, ],
-    newPostText: "Test render"
+    newPostText: "Test render",
+    profile: null
 }
 
 
 
-
+// REDUCER
 const profileReducer = (state = initialState, action) => {
    
     switch (action.type) {
@@ -42,6 +44,10 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newText
             }
+        case SET_USER_PROFILE:
+            return {
+                ...state, profile: action.profile
+            }
         default:
             return state;
     }
@@ -50,20 +56,25 @@ const profileReducer = (state = initialState, action) => {
 
 
 // ACTION CREATORS
-export const addPostActionCreator = () => {
+export const addPost = () => {
     return {
         type: ADD_POST
     }
 }
 
-export const updatePostActionCreator = (text) => {
+export const updatePost = (text) => {
     return {
         type: UPDATE_POST,
         newText: text
     }
 }
 
-
+export const setUserProfile = (profile) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
+    }
+}
 
 
 

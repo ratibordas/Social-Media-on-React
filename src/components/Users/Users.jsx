@@ -1,6 +1,7 @@
 import React from 'react'
 import avatar from "../../img/avatar.png"
 import "./Users.scss"
+import { Link } from 'react-router-dom';
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -26,7 +27,10 @@ const Users = (props) => {
                         return (
                             <li key={user.id}>
                                 <figure>
-                                    <img src={user.photos.small != null ? user.photos.small : avatar} alt="" />
+                                    <Link to={"/profile/" + user.id}>
+                                        <img src={user.photos.small != null ? user.photos.small : avatar} alt="" />
+                                    </Link>
+                                    
                                     <figcaption>
                                         {user.followed ? <button onClick={() => props.unfollow(user.id)}>Follow</button>
                                             : <button onClick={() => props.follow(user.id)}>Unfollow</button>}
