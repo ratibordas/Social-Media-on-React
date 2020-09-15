@@ -15,7 +15,7 @@ const Sidebar = (props) => {
     return (
         <aside className="sidebar">
             <ul>
-                <Link to="/"><li>Profile</li></Link>
+                <Link to="/profile"><li>Profile</li></Link>
                 <Link to="/dialogs"><li>Dialogs</li></Link>  
                  <Link to="/users"><li>Users</li></Link>  
             </ul>

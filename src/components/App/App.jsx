@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 
 // Components
-import Header from '../Header/Header';
+import HeaderContainer from '../Header/HeaderContainer';
 import SidebarContainer from '../Sidebar/SidebarContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import UsersContainer from '../Users/UsersContainer';
@@ -20,7 +20,7 @@ const App = (props) => {
   return (
     <Router>
       <section className="container">
-        <Header />
+        <HeaderContainer />
         <SidebarContainer/>
         <Switch>
           <Route path="/profile/:userId?"  >
