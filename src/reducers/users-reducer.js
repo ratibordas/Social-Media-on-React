@@ -1,4 +1,4 @@
-
+import {usersAPI} from '../api/api'
 
 // ACTION TYPES
 const FOLLOW_USER = "FOLLOW_USER"
@@ -51,25 +51,32 @@ const usersReducer = (state = initialState, action) => {
                         return user;
                     })
                 }
-        case SET_USERS:
-            return { ...state, users: action.users }
-        case SET_CURRENT_PAGE:
-            return { ...state, currentPage: action.currentPage }
-        case SET_TOTAL_USERS_COUNT:
-            return { ...state, totalUsersCount: action.totalUsersCount }
-       
-        case IS_FETCHING:
-            return {...state, isFetching: action.isFetching}
-        
-        case TOGGLE_IS_FOLLOWING_PROGRESS:
-            return {
-                ...state,
-                followingInProgress: action.isFetching
-                    ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id !== action.userId)
-            }
-                default:
-                    return state;
+                case SET_USERS:
+                    return {
+                        ...state, users: action.users
+                    }
+                    case SET_CURRENT_PAGE:
+                        return {
+                            ...state, currentPage: action.currentPage
+                        }
+                        case SET_TOTAL_USERS_COUNT:
+                            return {
+                                ...state, totalUsersCount: action.totalUsersCount
+                            }
+
+                            case IS_FETCHING:
+                                return {
+                                    ...state, isFetching: action.isFetching
+                                }
+
+                                case TOGGLE_IS_FOLLOWING_PROGRESS:
+                                    return {
+                                        ...state,
+                                        followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId] :
+                                            state.followingInProgress.filter(id => id !== action.userId)
+                                    }
+                                    default:
+                                        return state;
     }
 
 }
@@ -123,6 +130,50 @@ export const toggleFollowingProgress = (isFetching, userId) => {
         isFetching,
         userId
     }
+}
+
+// THUNKS
+export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(currentPage));
+        dispatch(isFetching(true));
+
+        // get users data via Axios from API
+        usersAPI.getUsersFromApi(currentPage, pageSize)
+            .then(data => {
+                dispatch(isFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setUsersTotalCount(data.totalCount))
+            })
+    }
+}
+export const unfollowThunkCreator = (id) => {
+    return (dispatch) => {
+       dispatch(toggleFollowingProgress(true, id))
+        usersAPI.unfollow(id)
+            .then(data => {
+        if (data.resultCode === 0) {
+           dispatch(unfollow(id))
+        }
+        dispatch(toggleFollowingProgress(false, id))
+    })
+    }
+   
+    
+}
+export const followThunkCreator = (id) => {
+    return (dispatch) => {
+       dispatch(toggleFollowingProgress(true, id))
+        usersAPI.follow(id)
+            .then(data => {
+        if (data.resultCode === 0) {
+           dispatch(follow(id))
+        }
+        dispatch(toggleFollowingProgress(false, id))
+    })
+    }
+   
+    
 }
 
 

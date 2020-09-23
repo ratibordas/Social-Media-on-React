@@ -8,30 +8,36 @@ import Loader from '../../Loader/Loader';
 
 
 const ProfileInfo = (props) => {
- if (!props.profile) {
-        return <Loader/>
-      }
+
+    if (!props.profile) {
+
+        return <Loader />
+    }
 
     return (
         <>
-         <figure className="profile__wallpaper">
-                <img src={myWallpapers} alt=""/>
+            <figure className="profile__wallpaper">
+                <img src={myWallpapers} alt="" />
             </figure>
-            
+
             <div className="profile__content">
                 <figure className="profile__content__avatar">
-                    <img src={props.profile.photos.large} alt="" />
+                    <img src={props.profile.photos.large ? props.profile.photos.large : myAvatar} alt="" />
                     <figcaption>
-                        <span>{props.profile.aboutMe}</span>
+                        <span>{props.profile.fullName ? props.profile.fullName : "user name null"}</span>
+                        <br />
+                        <span>{props.profile.aboutMe ? props.profile.aboutMe : "user status null"}</span>
+
+
                     </figcaption>
                 </figure>
-                  
+
             </div>
-        
-        
-        
+
+
+
         </>
-)
+    )
 
 }
 

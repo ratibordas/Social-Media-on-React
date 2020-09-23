@@ -1,10 +1,10 @@
 import React from 'react'
 import avatar from "../../img/avatar.png"
 import "./Users.scss"
-import Axios from 'axios'
 import { Link } from 'react-router-dom';
 
 const Users = (props) => {
+    
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -34,33 +34,13 @@ const Users = (props) => {
 
                                     <figcaption>
                                         {user.followed ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                            
-                                            props.toggleFollowingProgress(true, user.id)
-                                            Axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                                                {
-                                                    withCredentials: true,
-                                                    headers: { "API-KEY": "b6644f2f-7ed2-4906-a12a-7c8685cda02e" }
-                                                })
-                                                .then(response => {
-                                                    if (response.data.resultCode === 0) {
-                                                        props.unfollow(user.id)
-                                                    }
-                                                      props.toggleFollowingProgress(false, user.id)
-                                                })
+                                           
+                                            props.unfollowThunkCreator(user.id)
+                                           
                                         }}>Unfollow</button> :
                                             <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                                props.toggleFollowingProgress(true, user.id)
-                                            Axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
-                                                {
-                                                    withCredentials: true,
-                                                    headers: { "API-KEY": "b6644f2f-7ed2-4906-a12a-7c8685cda02e" }
-                                                })
-                                                .then(response => {
-                                                    if (response.data.resultCode === 0) {
-                                                        props.follow(user.id)
-                                                    }
-                                                    props.toggleFollowingProgress(false, user.id)
-                                                })
+                                              
+                                                props.followThunkCreator(user.id)   
                                         }
 
 

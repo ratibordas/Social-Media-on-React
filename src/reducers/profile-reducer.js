@@ -1,3 +1,6 @@
+import {usersAPI} from '../api/api'
+
+
 // ACTION TYPES
 const ADD_POST = "ADD_POST";
 const UPDATE_POST = "UPDATE_POST";
@@ -75,6 +78,13 @@ export const setUserProfile = (profile) => {
         profile
     }
 }
+
+// THUNKS
+export const getUserProfileThunkCreator = (userId) => (dispatch) => {
+        usersAPI.getProfile(userId).then(data => {
+                dispatch(setUserProfile(data))
+            })
+       }
 
 
 

@@ -1,3 +1,7 @@
+import {authAPI} from '../api/api'
+
+
+
 // ACTION TYPES
 const SET_USER_DATA = "SET_USER_DATA"
 const IS_FETCHING = "IS_FETCHING"
@@ -42,6 +46,16 @@ export const setAuthUserData = (userId, login, email) => {
         }
     }
 }
+// THUNKS
+
+export const getAuthUserDataThunkCreator = () => (dispatch) => {
+    authAPI.getMyProfile().then(data => {
+        if (data.resultCode === 0) {
+            const { id, login, email } = data.data;
+           dispatch(setAuthUserData(id, login, email));
+        }
+    })
+   }
 
 
 
