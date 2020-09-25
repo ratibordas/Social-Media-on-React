@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Contact from './Contact/Contact'
 import "./Dialogs.scss";
 import Message from './Message/Message';
@@ -31,7 +32,9 @@ const Dialogs = (props) => {
         props.addMessage(e.target.value)
     }
 
-
+     if(!props.isAuth) {
+         return <Redirect to={"/login"}/>
+     }
     return (
         <section className="dialogs">
             <aside className="dialogs__contact">

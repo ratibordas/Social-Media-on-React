@@ -10,6 +10,7 @@ import SidebarContainer from '../Sidebar/SidebarContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import UsersContainer from '../Users/UsersContainer';
 import ProfileContainer from '../Profile/ProfileContainer';
+import Login from '../Login/Login';
 
 
 
@@ -31,6 +32,9 @@ const App = (props) => {
           </Route>
           <Route path="/users">
              <UsersContainer/>
+          </Route>
+          <Route path="/login">
+             <Login/>
           </Route>
         </Switch>
 
