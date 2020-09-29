@@ -1,9 +1,10 @@
 import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import  {getUserProfileThunkCreator } from '../../reducers/profile-reducer'
+import { getUserProfileThunkCreator } from '../../reducers/profile-reducer'
 import { withRouter } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
@@ -11,33 +12,36 @@ class ProfileContainer extends React.Component {
         if (!userId) {
             userId = 10;
         }
-         this.props.getUserProfileThunkCreator(userId)
+        this.props.getUserProfileThunkCreator(userId)
     }
 
 
     render() {
-        if(!this.props.isAuth) {
-            return <Redirect to={"/login"}/>
-        }
-         return (
-        <main className="profile">
-                 <Profile {...this.props} profile={this.props.profile}/>
-        </main>
-    )
+
+        return (
+            <main className="profile">
+                <Profile {...this.props} profile={this.props.profile} />
+            </main>
+        )
     }
 }
 
 
 
 
+
+
+
 // Redux mapStateToProps
 const mapStateToProps = (state) => ({
-   profile: state.profilePage.profile,
-   isAuth: state.auth.isAuth
+    profile: state.profilePage.profile,
 });
 
-
-
-// React-Redux Connect
-
-export default connect(mapStateToProps,{getUserProfileThunkCreator})(withRouter(ProfileContainer)) ;
+// Redux compose
+export default compose(
+    // react-redux connect
+    connect(mapStateToProps, { getUserProfileThunkCreator }),
+   // withRouter HOC
+    withRouter,
+    // HOC 
+    withAuthRedirect)(ProfileContainer)

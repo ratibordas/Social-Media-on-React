@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Loader from '../Loader/Loader'
 import {setUsers,setCurrentPage, setUsersTotalCount, isFetching,toggleFollowingProgress, getUsersThunkCreator,unfollowThunkCreator, followThunkCreator
 } from '../../reducers/users-reducer';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 const Users = React.lazy(() => import('./Users'));
 
 
@@ -44,7 +46,12 @@ const mapStateToProps = (state) => {
      }
 }
 
-export default connect(mapStateToProps, {
+// Redux compose
+export default compose(
+    // HOC 
+    withAuthRedirect,
+    // react-redux connect
+    connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setUsersTotalCount,
@@ -53,6 +60,8 @@ export default connect(mapStateToProps, {
     getUsersThunkCreator,
     unfollowThunkCreator,
     followThunkCreator
-})(UsersContainer)
+}) )(UsersContainer)
+
+
 
 
