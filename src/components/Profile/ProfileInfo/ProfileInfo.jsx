@@ -3,7 +3,7 @@ import "./ProfileInfo.scss";
 import myAvatar from '../../../img/my-avatar.jpg';
 import myWallpapers from '../../../img/my-wallpapers.jpg';
 import Loader from '../../Loader/Loader';
-
+import ProfileStatus from './ProfileStatus/ProfileStatus'
 
 
 
@@ -24,9 +24,12 @@ const ProfileInfo = (props) => {
                 <figure className="profile__content__avatar">
                     <img src={props.profile.photos.large ? props.profile.photos.large : myAvatar} alt="" />
                     <figcaption>
-                        <span>{props.profile.fullName ? props.profile.fullName : "user name null"}</span>
-                        <br />
-                        <span>{props.profile.aboutMe ? props.profile.aboutMe : "user status null"}</span>
+                        <ProfileStatus 
+                        fullName={props.profile.fullName}
+                        aboutMe={props.profile.aboutMe}
+                        status={props.status}
+                        updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+                        />
 
 
                     </figcaption>

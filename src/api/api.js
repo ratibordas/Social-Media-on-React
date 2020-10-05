@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-// personal Axios instance
+// custom Axios instance
 const myAxios = Axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -19,32 +19,45 @@ export const usersAPI = {
     // func for follow user
     follow(id) {
         return myAxios.post(`follow/${id}`, {}).then(response => {
-           return response.data;
-       })
-     },
+            return response.data;
+        })
+    },
     // func for unfollow user
     unfollow(id) {
         return myAxios.delete(`follow/${id}`).then(response => {
-           return response.data;
-       })
-     },
-     // func for get profile user => Profile Page
-     getProfile(id) {
-         return myAxios.get(`profile/${id}`).then(response => {
-             return response.data;
-         })
-     }
+            return response.data;
+        })
+    },
+    // func for get profile user => Profile Page from profileAPI
+    getProfile(id) {
+        return profileAPI.getProfile(id)
+    }
 }
 
 
 export const authAPI = {
-   
-  getMyProfile() {
-      return myAxios.get(`auth/me`).then(response => {
-        return response.data
-      })
-  }
+    //get login|password. Authefication via https://social-network.samuraijs.com/
+    getMyProfile() {
+        return myAxios.get(`auth/me`).then(response => {
+            return response.data
+        })
+    }
 
 
 
+}
+
+export const profileAPI = {
+    // func for get profile user => Profile Page
+    getProfile(id) {
+        return myAxios.get(`profile/${id}`).then(response => {
+            return response.data;
+        })
+    },
+    getStatus(id) {
+        return myAxios.get(`profile/status/${id}`);
+    },
+    updateStatus(status) {
+        return myAxios.put(`profile/status`, { status: status });
+    }
 }
