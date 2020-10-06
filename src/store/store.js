@@ -4,15 +4,16 @@ import profileReducer from '../reducers/profile-reducer';
 import usersReducer from  '../reducers/users-reducer'
 import authReducer from "../reducers/auth-reducer";
 import thunkMiddleWare from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 
 
-
-// meld our reducers
+// mix our reducers
 let reducers = combineReducers({
    dialogsPage: dialogsReducer,
    profilePage: profileReducer,
    usersPage: usersReducer,
-   auth: authReducer
+   auth: authReducer,
+   form: formReducer
 })
 
 

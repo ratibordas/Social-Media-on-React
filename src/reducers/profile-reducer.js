@@ -3,7 +3,6 @@ import { usersAPI, profileAPI } from '../api/api'
 
 // ACTION TYPES
 const ADD_POST = "ADD_POST";
-const UPDATE_POST = "UPDATE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -13,8 +12,7 @@ let initialState = {
         id: 1,
         text: "Hi, I am tired",
         likeCounts: 0
-    },],
-    newPostText: "Test render",
+    }],
     profile: null,
     status: ""
 }
@@ -29,27 +27,13 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: Math.random(1 * 10),
-                text: state.newPostText,
+                text: action.newPostBody,
                 likeCounts: 0
             }
-            // create and return new state obj right away
-
             return {
                 ...state,
-                newPostText: "",
                 postsData: [...state.postsData, newPost]
             }
-
-
-        // UPD POST INTO MAIN PAGE
-        case UPDATE_POST:
-
-            // create and return new state obj right away
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-
         case SET_USER_PROFILE:
             return {
                 ...state, profile: action.profile
@@ -66,18 +50,14 @@ const profileReducer = (state = initialState, action) => {
 
 
 // ACTION CREATORS
-export const addPost = () => {
+export const addPost = (newPostBody) => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        newPostBody
     }
 }
 
-export const updatePost = (text) => {
-    return {
-        type: UPDATE_POST,
-        newText: text
-    }
-}
+
 
 export const setUserProfile = (profile) => {
     return {

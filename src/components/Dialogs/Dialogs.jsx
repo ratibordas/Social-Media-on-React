@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom';
 import Contact from './Contact/Contact'
 import "./Dialogs.scss";
 import Message from './Message/Message';
+import { reset,reduxForm, Field } from 'redux-form'
 
 
-
-
+// parent component
 const Dialogs = (props) => {
 
 
@@ -22,15 +22,15 @@ const Dialogs = (props) => {
           return <Message key={message.id} id={message.id} text={message.text} />
     })
 
-    // Actions
     
-    const onSendMessage = () => {
-        props.sendMessage()
-    }
     
-    const onAddMessage = (e) => {
-        props.addMessage(e.target.value)
+  
+    // submit callback
+    const addNewMessage = (messageData) => {
+        props.sendMessage(messageData.newMessageBody)
     }
+
+
 
      if(!props.isAuth) {
          return <Redirect to={"/login"}/>
@@ -48,10 +48,7 @@ const Dialogs = (props) => {
                 <ul>
                    {messagesElements}        
                 </ul>
-                <div className="dialogs__messages__textarea">
-                    <textarea   onChange={onAddMessage} value={props.newMessageText}></textarea>
-                    <button  onClick={onSendMessage}>Send</button>
-                 </div>
+                <AddMessagesReduxForm onSubmit={addNewMessage}  />
 
             </div>
         </section>
@@ -59,6 +56,25 @@ const Dialogs = (props) => {
 
 }
 
+
+
+const AddMessageForm = (props) => {
+    return (
+        <form className="dialogs__messages__textarea" onSubmit={props.handleSubmit}>
+        <Field  component={"textarea"} name={"newMessageBody"} placeholder={"Enter the message here"} />
+        <button>Send</button>
+     </form>
+    )
+}
+// reset form field after submit
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset("newMessagesForm"));
+
+//redux-form HOC
+const AddMessagesReduxForm = reduxForm({
+    form: "newMessagesForm",
+    onSubmitSuccess: afterSubmit
+})(AddMessageForm)
 
 
 export default Dialogs;

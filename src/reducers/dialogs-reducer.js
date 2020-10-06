@@ -1,7 +1,7 @@
 
 // ACTION TYPES
 const SEND_MESSAGE = "SEND_MESSAGE";
-const UPDATE_NEW_MESSAGE = "UPDATE_NEW_MESSAGE";
+
 
 // DATA
 let initialState = {
@@ -25,7 +25,7 @@ let initialState = {
         id: 2,
         text: "Test Message"
       }],
-      newMessageText: ""
+      
 }
 
 
@@ -38,24 +38,12 @@ let initialState = {
    
 
      switch (action.type) {
-      // UPD MESSAGE INTO DIALOGS PAGE
-       case UPDATE_NEW_MESSAGE:
-       
-       // create and return new state obj right away
-         return {
-           ...state,
-           newMessageText: action.newMessageText,
-            
-         }
-   
+      
        // SEND MESSAGE FROM DIALOGS PAGE
        case SEND_MESSAGE: 
-         let messageBody = state.newMessageText;
-    
-         // create and return new state obj right away
+         let messageBody = action.newMessageBody;
          return {
            ...state,
-           newMessageText: "",
            messagesData: [...state.messagesData,{id: Math.random(1 * 10),text: messageBody}]
          }
  
@@ -67,15 +55,11 @@ let initialState = {
 
 
  // ACTION CREATORS
-export const updateNewMessageActionCreator = (text) => {
+
+export const sendMessage = (newMessageBody) => {
     return {
-      type: UPDATE_NEW_MESSAGE,
-      newMessageText: text
-    }
-}
-export const sendMessageActionCreator = () => {
-    return {
-      type: SEND_MESSAGE
+      type: SEND_MESSAGE,
+      newMessageBody
       
     }
 }
