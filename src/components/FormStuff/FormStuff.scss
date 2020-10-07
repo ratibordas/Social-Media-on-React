@@ -1,0 +1,20 @@
+
+
+.form-control {
+  
+      .error {
+        border: 2px solid red;
+    }
+    .form-control__wrap-error {
+        display: inline-block;
+        span {
+            border-radius: 10%;
+            background-color: red;
+            color: white;
+            padding: 0.7rem;
+            
+        }
+    }
+    
+}
+

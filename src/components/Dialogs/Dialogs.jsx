@@ -4,8 +4,8 @@ import Contact from './Contact/Contact'
 import "./Dialogs.scss";
 import Message from './Message/Message';
 import { reset,reduxForm, Field } from 'redux-form'
-
-
+import { maxLengthValidator, requiredField } from '../../validators/validators';
+import {TextareaComponent} from '../FormStuff/FormStuff'
 // parent component
 const Dialogs = (props) => {
 
@@ -57,11 +57,11 @@ const Dialogs = (props) => {
 }
 
 
-
+const maxLength60 =  maxLengthValidator(60);
 const AddMessageForm = (props) => {
     return (
         <form className="dialogs__messages__textarea" onSubmit={props.handleSubmit}>
-        <Field  component={"textarea"} name={"newMessageBody"} placeholder={"Enter the message here"} />
+        <Field  component={TextareaComponent} name={"newMessageBody"} placeholder={"Enter the message here"} validate={[requiredField,maxLength60]} />
         <button>Send</button>
      </form>
     )

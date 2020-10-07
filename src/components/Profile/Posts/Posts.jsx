@@ -2,7 +2,8 @@ import React from 'react';
 import "./Posts.scss";
 import SinglePost from "./SinglePost/SinglePost";
 import { reset, reduxForm, Field } from 'redux-form'
-
+import { maxLengthValidator, requiredField } from '../../../validators/validators';
+import {TextareaComponent} from '../../FormStuff/FormStuff'
 
 
 const Posts = (props) => {
@@ -31,12 +32,12 @@ const Posts = (props) => {
     )
 }
 
-
+const maxLength5 =  maxLengthValidator(5);
 const AddPostsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
 
-            <Field type="text" name="newPostBody" component={"input"} />
+            <Field type="text" name="newPostBody" component={TextareaComponent} validate={[requiredField,maxLength5]} />
             <button>Submit</button>
 
         </form>
