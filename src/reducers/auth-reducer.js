@@ -1,10 +1,12 @@
+
 import {authAPI} from '../api/api'
+
 
 
 
 // ACTION TYPES
 const SET_USER_DATA = "SET_USER_DATA"
-const IS_FETCHING = "IS_FETCHING"
+
 
 // DATA
 let initialState = {
@@ -25,8 +27,7 @@ const authReducer = (state = initialState, action) => {
             
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload   
             }
                 default:
                     return state;
@@ -36,13 +37,14 @@ const authReducer = (state = initialState, action) => {
 
 
 // ACTION CREATORS
-export const setAuthUserData = (userId, login, email) => {
+export const setAuthUserData = (userId, login, email, isAuth) => {
     return {
         type: SET_USER_DATA,
-        data: {
+        payload: {
             userId,
             login,
-            email
+            email,
+            isAuth
         }
     }
 }
@@ -52,13 +54,26 @@ export const getAuthUserDataThunkCreator = () => (dispatch) => {
     authAPI.getMyProfile().then(data => {
         if (data.resultCode === 0) {
             const { id, login, email } = data.data;
-           dispatch(setAuthUserData(id, login, email));
+           dispatch(setAuthUserData(id, login, email, true));
         }
     })
    }
 
+   export const loginningThunkCreator = (email, password, rememberMe) => (dispatch) => {
+    authAPI.loginning(email, password, rememberMe).then(data => {
+        if (data.resultCode === 0) {
+           dispatch(getAuthUserDataThunkCreator());
+        }
+    })
+   }
 
-
-
+   export const logoutThunkCreator = () => (dispatch) => {
+    authAPI.logout().then(data => {
+        if (data.resultCode === 0) {
+           dispatch(setAuthUserData(null, null, null, false));
+           
+        }
+    })
+   }
 
 export default authReducer;
