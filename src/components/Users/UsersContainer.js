@@ -48,8 +48,6 @@ const mapStateToProps = (state) => {
 
 // Redux compose
 export default compose(
-    // HOC 
-    withAuthRedirect,
     // react-redux connect
     connect(mapStateToProps, {
     setUsers,

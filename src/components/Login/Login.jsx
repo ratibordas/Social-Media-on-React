@@ -2,31 +2,34 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form'
 import { requiredField } from '../../validators/validators';
-import {InputComponent} from '../FormStuff/FormStuff'
-import {loginningThunkCreator} from '../../reducers/auth-reducer'
+import { InputComponent } from '../FormStuff/FormStuff'
+import { loginningThunkCreator } from '../../reducers/auth-reducer'
 import { Redirect } from 'react-router-dom';
-
+import "../FormStuff/FormStuff.scss"
 
 
 const LoginForm = (props) => {
-    
+
     return (
-        
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field  placeholder={"Email"} name={"email"} component={InputComponent} validate={[requiredField]}/>
+
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={"Email"} name={"email"} component={InputComponent} validate={[requiredField]} />
+            </div>
+            <div>
+                <Field placeholder={"Password"} name={"password"} type={"password"} component={InputComponent} validate={[requiredField]} />
+            </div>
+            <div>
+                <Field type={"checkbox"} component={"input"} name={"rememberMe"} /> remember me
                 </div>
-                <div>
-                    <Field placeholder={"Password"} name={"password"} type={"password"} component={InputComponent} validate={[requiredField]}/>
-                </div>
-                <div>
-                    <Field type={"checkbox"} component={"input"} name={"rememberMe"}/> remember me
-                </div>
-                <div>
-                   <button type="submit">Login in</button>
-                </div>
-            </form>
-        
+            {props.error && <div className="allerror">
+                <p className="allerror__text">{props.error}</p>
+            </div>}
+            <div>
+                <button type="submit">Login in</button>
+            </div>
+        </form>
+
 
     )
 }
@@ -43,7 +46,7 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login Page</h1>
-            <LoginReduxForm  onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} />
         </div>
 
     )
@@ -62,4 +65,4 @@ const LoginReduxForm = reduxForm({
 
 
 
-export default connect(mapStateToProps, {loginningThunkCreator})(Login);
+export default connect(mapStateToProps, { loginningThunkCreator })(Login);

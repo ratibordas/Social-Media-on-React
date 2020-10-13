@@ -25,14 +25,17 @@ export const InputComponent = ({ input, meta, ...props }) => {
     const errorConditon = meta.touched && meta.error;
 
     return (
+       
         <div className="form-control">
             <input {...props} {...input} className={`${errorConditon && "error"}`} />
             {errorConditon && <div className="form-control__wrap-error">
                 <span>{meta.error}</span>
             </div>}
-
+           
 
         </div>
+        
+
     )
 }
 

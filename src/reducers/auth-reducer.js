@@ -1,6 +1,6 @@
 
 import {authAPI} from '../api/api'
-
+import {stopSubmit} from 'redux-form'
 
 
 
@@ -60,9 +60,14 @@ export const getAuthUserDataThunkCreator = () => (dispatch) => {
    }
 
    export const loginningThunkCreator = (email, password, rememberMe) => (dispatch) => {
+     
     authAPI.loginning(email, password, rememberMe).then(data => {
         if (data.resultCode === 0) {
            dispatch(getAuthUserDataThunkCreator());
+        } else {
+         let message = data.messages.length > 0 ? data.messages[0]: "Nope. Something incorrectly";
+             // call redux-form stopSubmit
+          dispatch(stopSubmit("login",{_error: message} ))
         }
     })
    }
