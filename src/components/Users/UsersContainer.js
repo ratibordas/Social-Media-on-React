@@ -4,7 +4,8 @@ import Loader from '../Loader/Loader'
 import {setUsers,setCurrentPage, setUsersTotalCount, isFetching,toggleFollowingProgress, getUsersThunkCreator,unfollowThunkCreator, followThunkCreator
 } from '../../reducers/users-reducer';
 import { compose } from 'redux';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import {getUsersSelector, getPageSizeSelector,getTotalUsersCountSelector,getCurrentPageSelector,getIsFetchingSelector,getFollowingInProgressSelector} from '../../selectors/users-selectors'
+
 const Users = React.lazy(() => import('./Users'));
 
 
@@ -37,12 +38,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUsersCount: getTotalUsersCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state)
      }
 }
 
