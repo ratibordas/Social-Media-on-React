@@ -4,7 +4,7 @@ import "./Users.scss"
 import { Link } from 'react-router-dom';
 
 const Users = (props) => {
-    
+
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -34,17 +34,17 @@ const Users = (props) => {
 
                                     <figcaption>
                                         {user.followed ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                           
+
                                             props.unfollowThunkCreator(user.id)
-                                           
+
                                         }}>Unfollow</button> :
                                             <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                              
-                                                props.followThunkCreator(user.id)   
-                                        }
+
+                                                props.followThunkCreator(user.id)
+                                            }
 
 
-                                        }>Follow</button>
+                                            }>Follow</button>
 
 
                                         }
