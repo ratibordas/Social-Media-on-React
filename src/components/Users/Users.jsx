@@ -1,8 +1,6 @@
 import React from 'react'
-import avatar from "../../img/avatar.png"
 import "./Users.scss"
-import { Link } from 'react-router-dom';
-
+import User from './User';
 const Users = (props) => {
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -21,41 +19,17 @@ const Users = (props) => {
                     })
                 }
             </ul>
-
+          
             <ul className="users__profiles">
                 {
                     props.users.map((user) => {
                         return (
-                            <li key={user.id}>
-                                <figure>
-                                    <Link to={"/profile/" + user.id}>
-                                        <img src={user.photos.small != null ? user.photos.small : avatar} alt="" />
-                                    </Link>
-
-                                    <figcaption>
-                                        {user.followed ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-
-                                            props.unfollowThunkCreator(user.id)
-
-                                        }}>Unfollow</button> :
-                                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-
-                                                props.followThunkCreator(user.id)
-                                            }
-
-
-                                            }>Follow</button>
-
-
-                                        }
-
-                                    </figcaption>
-                                </figure>
-                                <h1>{user.name}</h1>
-                                <h4>{user.status}</h4>
-
-
-                            </li>
+                            <User user={user}
+                            followingInProgress={props.followingInProgress}
+                            key={user.id}
+                            unfollowThunkCreator={props.unfollowThunkCreator}
+                            followThunkCreator={props.followThunkCreator}/>
+                
                         )
                     })
 

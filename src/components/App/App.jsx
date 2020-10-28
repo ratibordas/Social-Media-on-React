@@ -1,10 +1,7 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-
-
-
 
 // Components
 import HeaderContainer from '../Header/HeaderContainer';
@@ -31,27 +28,27 @@ class App extends React.Component {
       return <Loader />
     }
     return (
-      <Router>
-        <section className="container">
-          <HeaderContainer />
-          <SidebarContainer />
-          <Switch>
-            <Route path="/profile/:userId?"  >
-              <ProfileContainer />
-            </Route>
-            <Route path="/dialogs" >
-              <DialogsContainer />
-            </Route>
-            <Route path="/users">
-              <UsersContainer />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-          </Switch>
 
-        </section>
-      </Router>
+      <section className="container">
+        <HeaderContainer />
+        <SidebarContainer />
+        <Switch>
+          <Route path="/profile/:userId?"  >
+            <ProfileContainer />
+          </Route>
+          <Route path="/dialogs" >
+            <DialogsContainer />
+          </Route>
+          <Route path="/users">
+            <UsersContainer />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+        </Switch>
+
+      </section>
+
     )
   }
 }

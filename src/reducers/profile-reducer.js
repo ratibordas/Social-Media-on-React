@@ -73,23 +73,23 @@ export const setUserStatus = (status) => {
 }
 
 // THUNKS
-export const getUserProfileThunkCreator = (userId) => (dispatch) => {
-    usersAPI.getProfile(userId).then(data => {
-        dispatch(setUserProfile(data))
-    })
+export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
+    const data = await usersAPI.getProfile(userId)
+    dispatch(setUserProfile(data))
+
 }
 
-export const getUserStatusThunkCreator = (status) => (dispatch) => {
-    profileAPI.getStatus(status).then(response => {
-        dispatch(setUserStatus(response.data))
-    })
+export const getUserStatusThunkCreator = (status) => async (dispatch) => {
+    const response = await profileAPI.getStatus(status)
+    dispatch(setUserStatus(response.data))
+
 }
-export const updateUserStatusThunkCreator = (status) => (dispatch) => {
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0) {
-         dispatch(setUserStatus(status))
-        }    
-    })
+export const updateUserStatusThunkCreator = (status) => async (dispatch) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status))
+    }
+
 }
 
 
