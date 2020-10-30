@@ -1,25 +1,16 @@
 import React from 'react'
 import "./Users.scss"
 import User from './User';
+import Pagination from './Paginator';
 const Users = (props) => {
 
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
     return (
         <section className="users">
-            <ul className="users__pagination">
-                {
-                    pages.map(page => {
-                        return <li className={`users__pagination__item ${props.currentPage === page ? "selected" : ""}`}
-                            onClick={(e) => props.onPageChanged(page)}
-                        >{page}</li>
-                    })
-                }
-            </ul>
-          
+           <Pagination
+           currentPage={props.currentPage} 
+           onPageChanged={props.onPageChanged}
+           totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
+           />
             <ul className="users__profiles">
                 {
                     props.users.map((user) => {
@@ -32,21 +23,10 @@ const Users = (props) => {
                 
                         )
                     })
-
-
-
-
-
-
                 }
-
-
             </ul>
         </section>
     )
-
-
-
 }
 
 
