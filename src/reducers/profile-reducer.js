@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils';
 import { usersAPI, profileAPI } from '../api/api'
 
 
@@ -5,7 +6,7 @@ import { usersAPI, profileAPI } from '../api/api'
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
-
+const UPDATE_PHOTO = "UPDATE_PHOTO";
 // DATA
 let initialState = {
     postsData: [{
@@ -42,6 +43,10 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
+            case UPDATE_PHOTO:
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
         default:
             return state;
     }
@@ -72,6 +77,13 @@ export const setUserStatus = (status) => {
     }
 }
 
+export const savePhoto = (photos) => {
+    return {
+        type: UPDATE_PHOTO,
+        photos
+    }
+}
+
 // THUNKS
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     const data = await usersAPI.getProfile(userId)
@@ -92,6 +104,12 @@ export const updateUserStatusThunkCreator = (status) => async (dispatch) => {
 
 }
 
+export const updatePhotoThunkCreator = (photo) => async (dispatch) => {
+    const response = await profileAPI.updatePhoto(photo)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhoto(response.data.data.photos))
+    }
 
+}
 
 export default profileReducer;

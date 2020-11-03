@@ -63,10 +63,20 @@ export const profileAPI = {
             return response.data;
         })
     },
+    // func for get status user => Profile Page
     getStatus(id) {
         return myAxios.get(`profile/status/${id}`);
     },
+    // func for update profile user => Profile Page
     updateStatus(status) {
         return myAxios.put(`profile/status`, { status: status });
+    },
+    updatePhoto(photo) {
+        // VERY IMPORTANT FOR UPLOAD IMG ON SERVER
+        const formData = new FormData();
+        formData.append("image", photo)
+        //
+
+        return myAxios.put(`profile/photo`, formData);
     }
 }

@@ -9,6 +9,13 @@ import ProfileStatus from './ProfileStatus/ProfileStatus'
 
 const ProfileInfo = (props) => {
 
+  const photoUpdate = (e) => {
+     if(e.target.files) {
+         props.updatePhotoThunkCreator(e.target.files[0])
+     }
+  }
+
+
     if (!props.profile) {
 
         return <Loader />
@@ -17,18 +24,26 @@ const ProfileInfo = (props) => {
     return (
         <>
             <figure className="profile__wallpaper">
-                <img src={myWallpapers} alt="" />
+                <img src={props.profile.photos.large || myWallpapers} alt="" />
+             {
+                !props.authStatus ? <input type={"file"} onChange={photoUpdate}/> : null
+             }
+                
+                
+                
+               
             </figure>
-
+            
             <div className="profile__content">
                 <figure className="profile__content__avatar">
-                    <img src={props.profile.photos.large ? props.profile.photos.large : myAvatar} alt="" />
+                    <img src={props.profile.photos.small || myAvatar} alt="" />
                     <figcaption>
                         <ProfileStatus 
                         fullName={props.profile.fullName}
                         aboutMe={props.profile.aboutMe}
                         status={props.status}
                         updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+                        authorizedUserId={props.authorizedUserId}
                         />
 
 

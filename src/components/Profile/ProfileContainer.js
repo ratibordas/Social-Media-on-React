@@ -1,37 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getUserProfileThunkCreator,getUserStatusThunkCreator, updateUserStatusThunkCreator } from '../../reducers/profile-reducer'
+import { getUserProfileThunkCreator,getUserStatusThunkCreator, updateUserStatusThunkCreator,updatePhotoThunkCreator } from '../../reducers/profile-reducer'
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
-class ProfileContainer extends React.Component {
 
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
+const ProfileContainer = (props) => {
+
+
+
+    useEffect(() => {
+        let userId = props.match.params.userId;
         if (!userId) {
-            userId = this.props.authorizedUserId;
+            userId = props.authorizedUserId;
             if(!userId) {
-                this.props.history.push("/login")
+                props.history.push("/login")
             }
         }
-        this.props.getUserProfileThunkCreator(userId);
-        this.props.getUserStatusThunkCreator(userId);
-    }
+        props.getUserProfileThunkCreator(userId);
+        props.getUserStatusThunkCreator(userId);
+       
+
+    },[props.match.params.userId])
+    
 
 
-    render() {
+    
 
         return (
             <main className="profile">
-                <Profile {...this.props} />
+                <Profile {...props} />
             </main>
         )
-    }
+    
 }
-
-
 
 
 
@@ -48,7 +52,7 @@ const mapStateToProps = (state) => ({
 // Redux compose
 export default compose(
     // react-redux connect
-    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator }),
+    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator,updatePhotoThunkCreator }),
    // withRouter HOC
     withRouter,
     // HOC 

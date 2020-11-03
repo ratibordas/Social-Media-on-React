@@ -10,7 +10,11 @@ const Profile = (props) => {
     return (
         <main className="profile">
             <ProfileInfo profile={props.profile} status={props.status} 
-            updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}/>
+            updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+            authorizedUserId={props.authorizedUserId}
+            authStatus={props.match.params.userId}
+            updatePhotoThunkCreator={props.updatePhotoThunkCreator}
+            />
             <PostsContainer profile={props.profile} />
         </main>
     )

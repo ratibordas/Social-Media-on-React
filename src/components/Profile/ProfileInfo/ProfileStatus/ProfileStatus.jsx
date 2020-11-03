@@ -38,12 +38,12 @@ const ProfileStatus = (props) => {
                     <span>{props.fullName ? props.fullName : "user name null"}</span>
                 </div>
                 <div>
-                    <span>{props.aboutMe ? props.aboutMe : "user about null"}</span>
+                    {/* <span>{props.aboutMe ? props.aboutMe : "user about null"}</span> */}
                 </div>
                 <br />
                 <div>
                     {
-                        editMode ?
+                        editMode && !props.authorizedUserId ?
                             <input onChange={onStatusChange} autoFocus={true} onBlur={editPassive} value={status}></input> :
                             <span onDoubleClick={editActive}>{props.status ? props.status : "Where is your status?"}</span>
                     }
