@@ -67,7 +67,7 @@ export const profileAPI = {
     getStatus(id) {
         return myAxios.get(`profile/status/${id}`);
     },
-    // func for update profile user => Profile Page
+    // func for update status user => Profile Page
     updateStatus(status) {
         return myAxios.put(`profile/status`, { status: status });
     },
@@ -76,7 +76,11 @@ export const profileAPI = {
         const formData = new FormData();
         formData.append("image", photo)
         //
-
+     // func for update profile avatar  => Profile Page
         return myAxios.put(`profile/photo`, formData);
+    },
+    saveProfileData(profile) {
+        return myAxios.put(`profile`, profile);
     }
+    
 }

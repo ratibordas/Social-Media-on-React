@@ -24,26 +24,28 @@ const ProfileInfo = (props) => {
     return (
         <>
             <figure className="profile__wallpaper">
+                <div className="profile__wallpaper__photo-large">
                 <img src={props.profile.photos.large || myWallpapers} alt="" />
-             {
+                </div> 
+                <figcaption>
+                {
                 !props.authStatus ? <input type={"file"} onChange={photoUpdate}/> : null
-             }
-                
-                
-                
-               
+                  }
+                </figcaption>
             </figure>
+           
             
             <div className="profile__content">
                 <figure className="profile__content__avatar">
                     <img src={props.profile.photos.small || myAvatar} alt="" />
                     <figcaption>
                         <ProfileStatus 
-                        fullName={props.profile.fullName}
-                        aboutMe={props.profile.aboutMe}
+                        profile={props.profile}
                         status={props.status}
                         updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
                         authorizedUserId={props.authorizedUserId}
+                        authStatus={props.authStatus}
+                        saveProfileDataThunkCreator={props.saveProfileDataThunkCreator}
                         />
 
 

@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { getUserProfileThunkCreator,getUserStatusThunkCreator, updateUserStatusThunkCreator,updatePhotoThunkCreator } from '../../reducers/profile-reducer'
+import { getUserProfileThunkCreator,getUserStatusThunkCreator, 
+    updateUserStatusThunkCreator,updatePhotoThunkCreator
+    ,saveProfileDataThunkCreator } from '../../reducers/profile-reducer'
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -31,7 +33,7 @@ const ProfileContainer = (props) => {
 
         return (
             <main className="profile">
-                <Profile {...props} />
+                <Profile {...props}  />
             </main>
         )
     
@@ -52,7 +54,7 @@ const mapStateToProps = (state) => ({
 // Redux compose
 export default compose(
     // react-redux connect
-    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator,updatePhotoThunkCreator }),
+    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator,updatePhotoThunkCreator,saveProfileDataThunkCreator }),
    // withRouter HOC
     withRouter,
     // HOC 

@@ -14,6 +14,7 @@ const Profile = (props) => {
             authorizedUserId={props.authorizedUserId}
             authStatus={props.match.params.userId}
             updatePhotoThunkCreator={props.updatePhotoThunkCreator}
+            saveProfileDataThunkCreator={props.saveProfileDataThunkCreator}
             />
             <PostsContainer profile={props.profile} />
         </main>

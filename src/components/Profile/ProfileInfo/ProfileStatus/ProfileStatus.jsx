@@ -1,62 +1,45 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState } from 'react'
+import ProfileStatusChanger from './ProfileStatusChanger'
+import ProfileDataFormRedux from './ProfileDataForm'
+import ProfileOtherInfo from './ProfileOtherInfo'
 
 
 const ProfileStatus = (props) => {
 
-  
+    const [editInfo, setEditInfo] = useState(false)
 
-   const [editMode, changeEditMode] = useState(false)
-   const [status, setStatus] = useState(props.status)
-
-  const editActive = () => {
-    changeEditMode(true)
+    const onSubmit = (formData) => {
+       props.saveProfileDataThunkCreator(formData).then(
+       () => {
+        setEditInfo(false);
+       })
+       
     }
 
-  const  editPassive = () => {
-        changeEditMode(false)
-        props.updateUserStatusThunkCreator(status)
-    }
-
-  const onStatusChange = (e) => {
-   
-     setStatus(e.target.value)
-
-    }
-
-  
-
-    useEffect(() => {
-        if(status !== props.status) {
-            setStatus(props.status)
-        }
-    }, [props.status])
-
-    
-        return (
-            <>
-                <div>
-                    <span>{props.fullName ? props.fullName : "user name null"}</span>
-                </div>
-                <div>
-                    {/* <span>{props.aboutMe ? props.aboutMe : "user about null"}</span> */}
-                </div>
-                <br />
-                <div>
-                    {
-                        editMode && !props.authorizedUserId ?
-                            <input onChange={onStatusChange} autoFocus={true} onBlur={editPassive} value={status}></input> :
-                            <span onDoubleClick={editActive}>{props.status ? props.status : "Where is your status?"}</span>
-                    }
-                </div>
 
 
-            </>
-        )
+    return (
+        <>
+       
+            {
+                editInfo && !props.authStatus
+                ? <ProfileDataFormRedux  profile={props.profile} initialValues={props.profile} onSubmit={onSubmit} /> :
+                 <ProfileOtherInfo profile={props.profile} authStatus={props.authStatus}  toggleEditInfo={() => setEditInfo(true)} />
+            }
 
-    
+            <div>
+                <ProfileStatusChanger status={props.status}
+                    updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} authStatus={props.authStatus} />
+            </div>
+
+        </>
+    )
+
+
 
 
 }
+
 
 
 

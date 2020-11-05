@@ -1,12 +1,13 @@
 import { act } from 'react-dom/test-utils';
 import { usersAPI, profileAPI } from '../api/api'
-
+import { stopSubmit } from 'redux-form'
 
 // ACTION TYPES
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_PHOTO = "UPDATE_PHOTO";
+const SAVE_PROFILE = "SAVE_PROFILE";
 // DATA
 let initialState = {
     postsData: [{
@@ -43,10 +44,14 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
-            case UPDATE_PHOTO:
+        case UPDATE_PHOTO:
             return {
-                ...state, profile: {...state.profile, photos: action.photos}
+                ...state, profile: { ...state.profile, photos: action.photos }
             }
+        // case SAVE_PROFILE:
+        //     return {
+        //         ...state, profile: {...state.profile,profile: action.profile}
+        //     }
         default:
             return state;
     }
@@ -83,6 +88,12 @@ export const savePhoto = (photos) => {
         photos
     }
 }
+// export const saveProfile = (profile) => {
+//     return {
+//         type: SAVE_PROFILE,
+//         profile
+//     }
+// }
 
 // THUNKS
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
@@ -108,6 +119,21 @@ export const updatePhotoThunkCreator = (photo) => async (dispatch) => {
     const response = await profileAPI.updatePhoto(photo)
     if (response.data.resultCode === 0) {
         dispatch(savePhoto(response.data.data.photos))
+    }
+
+}
+
+export const saveProfileDataThunkCreator = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfileData(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfileThunkCreator(userId))
+    } else {
+        let key = `Incorrect format: ${response.data.messages[0].match(/Contacts->(\w+)/)[1].toLowerCase()} field`
+        // call redux-form stopSubmit
+        dispatch(stopSubmit("edit-profile", {_error: key }
+            ));
+        return Promise.reject(response.data.messages[0]);
     }
 
 }
