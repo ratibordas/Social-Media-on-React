@@ -9,6 +9,8 @@ import "../FormStuff/FormStuff.scss"
 
 
 const LoginForm = (props) => {
+     
+     
 
     return (
 
@@ -23,9 +25,12 @@ const LoginForm = (props) => {
                 <Field type={"checkbox"} component={"input"} name={"rememberMe"} /> remember me
                 </div>
             {props.error && <div className="allerror">
+                
                 <p className="allerror__text">{props.error}</p>
             </div>}
             <div>
+                {props.captchaUrl && <img src={props.captchaUrl} alt="captcha"/>}
+                {props.captchaUrl && <Field name={"captcha"} component={"input"}  validate={[requiredField]}/>}
                 <button type="submit">Login in</button>
             </div>
         </form>
@@ -38,7 +43,7 @@ const LoginForm = (props) => {
 // parent login component
 const Login = (props) => {
     const onSubmit = (formData) => {
-        props.loginningThunkCreator(formData.email, formData.password, formData.rememberMe);
+        props.loginningThunkCreator(formData.email, formData.password, formData.rememberMe, formData.captcha);
     }
     if (props.isAuth) {
         return <Redirect to={"/profile"} />
@@ -46,14 +51,15 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login Page</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
         </div>
 
     )
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 //redux-form HOC

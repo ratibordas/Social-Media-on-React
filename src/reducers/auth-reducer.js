@@ -6,14 +6,15 @@ import { stopSubmit } from 'redux-form'
 
 // ACTION TYPES
 const SET_USER_DATA = "SET_USER_DATA"
-
+const GET_CAPTCHA = "GET_CAPTCHA"
 
 // DATA
 let initialState = {
     userId: null,
     login: null,
     email: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 }
 
 
@@ -22,9 +23,9 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
-
+         // 2 cases at the same time!!!
         case SET_USER_DATA:
-
+        case GET_CAPTCHA:
             return {
                 ...state,
                 ...action.payload
@@ -48,6 +49,12 @@ export const setAuthUserData = (userId, login, email, isAuth) => {
         }
     }
 }
+export const getCaptcha = (captchaUrl) => {
+    return {
+        type: GET_CAPTCHA,
+        payload: {captchaUrl}
+    }
+}
 // THUNKS
 
 export const getAuthUserDataThunkCreator = () => async (dispatch) => {
@@ -59,12 +66,15 @@ export const getAuthUserDataThunkCreator = () => async (dispatch) => {
 
 }
 
-export const loginningThunkCreator = (email, password, rememberMe) => async (dispatch) => {
+export const loginningThunkCreator = (email, password, rememberMe, captcha) => async (dispatch) => {
 
-    const data = await authAPI.loginning(email, password, rememberMe)
+    const data = await authAPI.loginning(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator());
     } else {
+        if(data.resultCode === 10) {
+           dispatch(getCaptchaUrlThunkCreator()) 
+        }
         let message = data.messages.length > 0 ? data.messages[0] : "Nope. Something incorrectly";
         // call redux-form stopSubmit
         dispatch(stopSubmit("login", { _error: message }))
@@ -80,5 +90,12 @@ export const logoutThunkCreator = () => async (dispatch) => {
     }
 
 }
+export const getCaptchaUrlThunkCreator = () => async (dispatch) => {
+    const data = await authAPI.getCaptchaUrl()
+    const captchaUrl = data.url
+    dispatch(getCaptcha(captchaUrl));
+}
+
+
 
 export default authReducer;

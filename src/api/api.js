@@ -42,19 +42,26 @@ export const authAPI = {
             return response.data
         })
     },
-    loginning(email, password, rememberMe = false) {
+    loginning(email, password, rememberMe = false, captcha = null) {
 
-        return myAxios.post(`auth/login`, { email, password, rememberMe }).then(response => {
+        return myAxios.post(`auth/login`, { email, password, rememberMe, captcha }).then(response => {
             return response.data
         })
     },
     logout() {
         return myAxios.delete(`auth/login`);
+    },
+    getCaptchaUrl() {
+        return myAxios.get(`security/get-captcha-url`).then(response => {
+            return response.data
+        })
     }
-
-
-
+    
 }
+
+
+
+
 
 export const profileAPI = {
     // func for get profile user => Profile Page
