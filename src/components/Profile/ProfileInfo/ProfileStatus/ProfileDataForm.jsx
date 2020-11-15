@@ -8,16 +8,12 @@ const ProfileDataForm = (props) => {
 
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className="profile__form">
             <div>
             <Field  placeholder={"Name"} name={"fullName"} component={"input"}/>
             </div>
             <div>
             <Field  placeholder={"About Me"} name={"aboutMe"} component={"input"}/>
-            </div>
-            <div>
-                <span>Job Status</span>
-            <Field   name={"lookingForAJob"} component={"input"} type={"checkbox"}/>
             </div>
             <div>
             <Field  placeholder={"Job Description"} name={"lookingForAJobDescription"} component={"textarea"}/>

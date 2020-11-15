@@ -7,7 +7,7 @@ const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const UPDATE_PHOTO = "UPDATE_PHOTO";
-const SAVE_PROFILE = "SAVE_PROFILE";
+
 // DATA
 let initialState = {
     postsData: [{
@@ -48,10 +48,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, profile: { ...state.profile, photos: action.photos }
             }
-        // case SAVE_PROFILE:
-        //     return {
-        //         ...state, profile: {...state.profile,profile: action.profile}
-        //     }
+        
         default:
             return state;
     }

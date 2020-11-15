@@ -4,6 +4,9 @@ import User from './User';
 import Pagination from './Paginator';
 const Users = (props) => {
 
+     
+
+
     return (
         <section className="users">
            <Pagination
@@ -13,15 +16,19 @@ const Users = (props) => {
            />
             <ul className="users__profiles">
                 {
+                    
                     props.users.map((user) => {
-                        return (
-                            <User user={user}
-                            followingInProgress={props.followingInProgress}
-                            key={user.id}
-                            unfollowThunkCreator={props.unfollowThunkCreator}
-                            followThunkCreator={props.followThunkCreator}/>
-                
-                        )
+                        
+                            return (
+                                <User user={user}
+                                followingInProgress={props.followingInProgress}
+                                key={user.id}
+                                unfollowThunkCreator={props.unfollowThunkCreator}
+                                followThunkCreator={props.followThunkCreator}/>
+                    
+                            )
+                        
+                       
                     })
                 }
             </ul>

@@ -8,16 +8,17 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const IS_FETCHING = "IS_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+const SET_FRIENDS = "SET_FRIENDS";
 
 // DATA
 let initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    
     currentPage: 1,
     isFetching: true,
-    followingInProgress: []
+    followingInProgress: [],
+    friends: []
 }
 
 
@@ -76,6 +77,10 @@ const usersReducer = (state = initialState, action) => {
                 followingInProgress: action.isFetching ? [...state.followingInProgress, action.userId] :
                     state.followingInProgress.filter(id => id !== action.userId)
             }
+            case SET_FRIENDS:
+                return {
+                    ...state, friends: action.friends
+                }
         default:
             return state;
     }
@@ -102,6 +107,13 @@ export const setUsers = (users) => {
     return {
         type: SET_USERS,
         users
+    }
+}
+export const setFriends = (friends) => {
+    return {
+        type: SET_FRIENDS,
+        friends,
+
     }
 }
 
@@ -134,6 +146,7 @@ export const toggleFollowingProgress = (isFetching, userId) => {
 }
 
 // THUNKS
+
 export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
     return async (dispatch) => {
         dispatch(setCurrentPage(currentPage));
@@ -147,6 +160,17 @@ export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
 
     }
 }
+export const getFriendsThunkCreator = () => {
+    return async (dispatch) => {
+       
+
+        // get users data via Axios from API
+        const data = await usersAPI.getFriends()
+        dispatch(setFriends(data.items))
+        
+
+    }
+}
 export const unfollowThunkCreator = (id) => {
     return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, id))
@@ -155,7 +179,7 @@ export const unfollowThunkCreator = (id) => {
             dispatch(unfollow(id))
         }
         dispatch(toggleFollowingProgress(false, id))
-
+        dispatch(getFriendsThunkCreator())
     }
 
 
@@ -168,6 +192,7 @@ export const followThunkCreator = (id) => {
             dispatch(follow(id))
         }
         dispatch(toggleFollowingProgress(false, id))
+        dispatch(getFriendsThunkCreator())
     }
 
 

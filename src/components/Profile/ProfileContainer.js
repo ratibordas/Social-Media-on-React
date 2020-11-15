@@ -7,7 +7,7 @@ import { getUserProfileThunkCreator,getUserStatusThunkCreator,
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-
+import {getProfileSelector,getStatusSelector,getAuthorizedUserIdSelector,isAuthSelector} from '../../selectors/profile-selectors';
 
 const ProfileContainer = (props) => {
 
@@ -45,10 +45,10 @@ const ProfileContainer = (props) => {
 
 // Redux mapStateToProps
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    profile: getProfileSelector(state),
+    status: getStatusSelector(state),
+    authorizedUserId: getAuthorizedUserIdSelector(state),
+    isAuth: isAuthSelector(state)
 });
 
 // Redux compose

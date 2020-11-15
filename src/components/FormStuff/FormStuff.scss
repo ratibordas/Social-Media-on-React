@@ -1,31 +1,99 @@
+@import "../App/App.scss";
+
+@mixin form-elements-style {
+    width: 100%;
+    line-height: 1.5;
+    padding: 15px 10px;
+    border: 1px solid grey;
+    color: $text-color-light;
+    background: $nav-color;
+    transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
 
 
 .form-control {
-  
-      .error {
-        border: 2px solid red;
-    }
+     position: relative;
+     padding-left: 3rem;
+     width: 100%;
+    // wrap error
     .form-control__wrap-error {
         display: inline-block;
+        position: absolute;
+        top: 2rem;
+        width: 100%;
+        height: 100%;
+        left: 13rem;
+       
         span {
             border-radius: 10%;
-            background-color: red;
-            color: white;
+            background-color: $text-color-light;
+            color: $text-color-dark;
+            width: 100%;
             padding: 0.7rem;
-            
+            font-weight: bold;
+        }
+        .error {
+            border: 2px solid $text-color-light;
         }
     }
    
-    
+    button,
+    label {
+        cursor: pointer;
+    }
+    textarea {
+        resize: none;
+    }
+
+
+    //---------------------------------
+
+
+    select,
+    input,
+    textarea {
+        @include form-elements-style;
+        margin-top: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus,
+    button:enabled:hover,
+    button:focus,
+    input[type="checkbox"]:focus+label {
+        background: $nav-color;
+    }
+
+    .select:focus,
+    input:focus,
+    textarea:focus {
+      transform: scale(1.02);
+    }
+
+    input[type="checkbox"] {
+        background: $nav-color;
+        padding: 15px 10px;
+        transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+        transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+    }
+
 }
 
 .allerror {
     display: inline-block;
+    
     .allerror__text {
         border-radius: 10%;
-        border: 1px solid rgb(255, 0, 0);
-        color: red;
+        background-color: $text-color-light;
+        color: $text-color-dark;
+        width: 100%;
         padding: 0.7rem;
-        
+        font-weight: bold;
+
     }
 }

@@ -1,6 +1,7 @@
 import { getAuthUserDataThunkCreator } from "./auth-reducer";
 
 
+
 // ACTION TYPES
 const INITIALIZED = "INITIALIZED"
 
@@ -9,6 +10,7 @@ const INITIALIZED = "INITIALIZED"
 let initialState = {
     initialized: false
 }
+
 
 
 
@@ -48,6 +50,7 @@ export const initializedThunkCreator = () => (dispatch) => {
   Promise.all([promise])
   .then(() => {
         dispatch(initializedUser()) 
+        
     })
     
    }

@@ -6,7 +6,7 @@ import { InputComponent } from '../FormStuff/FormStuff'
 import { loginningThunkCreator } from '../../reducers/auth-reducer'
 import { Redirect } from 'react-router-dom';
 import "../FormStuff/FormStuff.scss"
-
+import "./Login.scss";
 
 const LoginForm = (props) => {
      
@@ -19,18 +19,19 @@ const LoginForm = (props) => {
                 <Field placeholder={"Email"} name={"email"} component={InputComponent} validate={[requiredField]} />
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} type={"password"} component={InputComponent} validate={[requiredField]} />
+                <Field  placeholder={"Password"} name={"password"} type={"password"} component={InputComponent} validate={[requiredField]} />
             </div>
-            <div>
-                <Field type={"checkbox"} component={"input"} name={"rememberMe"} /> remember me
-                </div>
+            <div className="check">
+            <Field type={"checkbox"} component={"input"} name={"rememberMe"} className="custom-checkbox" /> remember me
+            </div>
             {props.error && <div className="allerror">
                 
                 <p className="allerror__text">{props.error}</p>
             </div>}
             <div>
                 {props.captchaUrl && <img src={props.captchaUrl} alt="captcha"/>}
-                {props.captchaUrl && <Field name={"captcha"} component={"input"}  validate={[requiredField]}/>}
+                {props.captchaUrl && <Field name={"captcha"} component={InputComponent}  validate={[requiredField]}/>}
+
                 <button type="submit">Login in</button>
             </div>
         </form>
@@ -49,10 +50,12 @@ const Login = (props) => {
         return <Redirect to={"/profile"} />
     }
     return (
-        <div>
+        <section className="login">
+            <div className="login__wrapper">
             <h1>Login Page</h1>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
-        </div>
+            </div>
+        </section>
 
     )
 }

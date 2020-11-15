@@ -1,14 +1,116 @@
 @import "./_reset.scss";
 
+$text-color-light: rgb(215, 215, 12);
+$nav-color: rgb(24, 23, 23);
+$text-color-dark: rgb(33, 33, 33);
+
+@mixin side-0 {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@mixin star-move-animation($property) {
+	-webkit-animation-name: STAR-MOVE;
+	animation-name: STAR-MOVE;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-duration: $property;
+	animation-duration: $property;
+}
+
+
+
+body {
+	background: black;
+	color: $text-color-light;
+}
+
+button {
+	background: $text-color-light;
+	color: rgb(33, 33, 33);
+	border: 1px solid black;
+}
 
 .container {
- display: grid;
- grid-template-columns: repeat(12, 1fr);
- grid-template-rows: 3rem 1fr;
- margin-right: auto;
- margin-left: auto;
- width: 80%;
+	display: grid;
+	grid-template-areas: 
+    "header header"
+	"nav main";
+	grid-template-columns: 150px 1fr ;
+	grid-template-rows: 70px 1fr;
+	margin-right: auto;
+	margin-left: auto;
+	width: 60%;
+	z-index: 500;
+	position: relative;
+	background: $nav-color;
+	height: 100%;
+	top: 0;
+	overflow-y: visible;
+	
+	
+}
 
- 
+@-webkit-keyframes STAR-MOVE {
+	from {
+		background-position: 5% 5%
+	}
+	to { 
+		background-position: 1300% 600%
+	}
+}
 
+@keyframes STAR-MOVE {
+	from {
+		background-position: 5% 5%
+	}
+	to { 
+		background-position: 1300% 600%
+	}
+}
+
+#background {
+	background: black url("../../img/background.png") repeat 5% 5%;
+	position: absolute;
+	z-index: 100;
+	@include side-0();
+	@include star-move-animation(200s)
+
+
+}
+
+#midground {
+	background: url("../../img/midground.png") repeat 20% 20%;
+	position: absolute;
+	z-index: 200;
+	@include side-0();
+	@include star-move-animation(150s)
+	
+
+
+}
+
+#foreground {
+	background: url("../../img/foreground.png") repeat 35% 35%;
+	position: absolute;
+	z-index: 300;
+	@include side-0();
+	@include star-move-animation(100s)
+	
+}
+
+.clear {
+	clear: both;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.floatRight {
+	float: right;
 }

@@ -1,5 +1,11 @@
+@import "../App/App.scss";
+
 .profile {
- grid-column: span 10;
-    
+    border: 1px solid black;
+    background: $text-color-dark;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+
 }
 

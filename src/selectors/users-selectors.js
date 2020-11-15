@@ -1,6 +1,9 @@
 export const getUsersSelector = (state) => {
     return state.usersPage.users;
 }
+export const getFriendsSelector = (state) => {
+    return state.usersPage.friends;
+}
 
 export const getPageSizeSelector = (state) => {
     return state.usersPage.pageSize;

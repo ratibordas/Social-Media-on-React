@@ -1,19 +1,52 @@
- 
- 
- .profile__wallpaper  {
-    margin-bottom: 5rem;  
-    img {
-        height: 200px;
-        width: 30%;
-    }
-            
-     }
-     
-.profile__content__avatar {
-         img {
-             width: 75px;
-             height: 75px;
+ @import "../../App/App.scss";
+
+
+ .profile__content {
+     max-width: 100%;
+     margin-top: 1rem;
+     margin-right: 10rem;
+
+     ul {
+         list-style: none;
+         text-align: left;
+         background-color: $nav-color;
+         border: 1px solid black;
+
+         li {
+             margin-right: 1rem;
          }
      }
 
-   
+     .profile__wallpaper {
+         margin-bottom: 2rem;
+         position: relative;
+
+         img {
+
+             width: 17rem;
+         }
+
+     }
+ }
+
+
+
+ .profile__content__update-photo {
+     top: 15rem;
+     position: absolute;
+     color: transparent;
+
+ }
+
+ .profile__status__wrapper {
+    input,textarea {
+        width: 100%;
+        line-height: 1.5;
+        border: 1px solid grey;
+        color: $text-color-light;
+        background: $nav-color;
+        transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+            transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+       outline: none;
+    }
+ }

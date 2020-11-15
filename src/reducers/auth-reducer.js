@@ -1,6 +1,7 @@
 
 import { authAPI } from '../api/api'
 import { stopSubmit } from 'redux-form'
+import { getFriendsThunkCreator } from './users-reducer'
 
 
 
@@ -71,6 +72,7 @@ export const loginningThunkCreator = (email, password, rememberMe, captcha) => a
     const data = await authAPI.loginning(email, password, rememberMe, captcha)
     if (data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator());
+        dispatch(getFriendsThunkCreator());
     } else {
         if(data.resultCode === 10) {
            dispatch(getCaptchaUrlThunkCreator()) 

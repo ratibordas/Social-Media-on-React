@@ -1,21 +1,71 @@
+@import "../App/App.scss";
+
+
+.users {
+border: 1px solid black;
+background: $text-color-dark;
+margin: 1rem;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+flex-direction: row-reverse;
+
+
+.users__pagination__up {
+    margin-left: 2.5rem;
+}
+
+
+.users__pagination__up, .users__pagination__down {
+    text-align: center;
+    outline: none;
+    border: none;
+    color: $text-color-dark;
+    cursor: pointer;
+
+}
+.users__profiles {
+      margin: 1rem;
+        li {
+            margin-top: 20px;
+            img {
+                border-radius: 30px;
+            }
+            button {
+                cursor: pointer;  
+                outline: none; 
+            }
+        }
+}
+
 
 .users__pagination {
-    list-style: none;
-    .users__pagination__item {
-        margin-right: 0.5rem;
+    margin-right: 4rem;
+    margin-top: 20%;
+    text-align: center;
+    
+    ul {
+        list-style: none;
         display: inline;
+    }
+   
+    .users__pagination__item {
         cursor: pointer;
+        font-size: 1.5rem;
     }
 }
+
+}
+
+
+
+
+
 
 
 .selected {
     font-weight: 800;
-    color: red;
-    font-size: large;
+    color: white;
+   
 }
 
-.users__profiles {
-    transform: translateX(10rem);
-    transform: translateY(10rem);
-}

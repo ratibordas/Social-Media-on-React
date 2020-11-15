@@ -1,6 +1,42 @@
-
+@import "../App/App.scss";
 
 .sidebar {
-    grid-column: span 2;
-    background-color: grey;
+    background-color: $text-color-dark;
+    border: 1px solid black;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    h3 {
+        margin-left: 5px;
+    }
+      .sidebar__nav {
+          margin: 1rem;
+          
+          .sidebar__nav__li {
+              font-size: 20px;
+          }
+          a {
+               text-decoration: none;
+               color: $text-color-light;
+           }
+           a:hover {
+               color: white;
+           }
+      }
+
+      .sidebar__friends {
+          margin: 1rem;
+          font-size: 15px;
+          li {
+              
+              margin-top: 5px;
+          }
+        
+          img {
+              width: 30%;
+              border-radius: 20px;
+          }
+      }
+
+
+
 }

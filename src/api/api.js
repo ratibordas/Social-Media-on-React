@@ -31,6 +31,13 @@ export const usersAPI = {
     // func for get profile user => Profile Page from profileAPI
     getProfile(id) {
         return profileAPI.getProfile(id)
+    },
+    getFriends() {
+        
+        return myAxios.get(`users?friend=true`).then(response => {
+            
+            return response.data;
+        })
     }
 }
 

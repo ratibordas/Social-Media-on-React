@@ -6,28 +6,28 @@ const ProfileOtherInfo = ( {profile, toggleEditInfo, authStatus}) => {
     return (
         <>
             <div>
-                <span>{profile.fullName || "NoName"}</span>
+                <span>Name: {profile.fullName || "NoName"}</span>
             </div>
             <div>
-                <span>{profile.aboutMe || "About Me"}</span>
+                <span>About me: {profile.aboutMe || "-"}</span>
             </div>
             <div>
-                <span>Search job:{profile.lookingForAJob ? profile.lookingForAJobDescription : "I dont know"}</span>
+                <span>Search job: {profile.lookingForAJob ? profile.lookingForAJobDescription : "-"}</span>
             </div>
             <div>
-
-                {/* Mapping */}
-                <span>Contact: 
+              <h4>Contact information</h4>
+                <ul>
                    
                     {Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-                })}</span>
+                })}</ul>
                 
-                {/* Mapping */}
-            </div>
-              {
+               
+                {
                  !authStatus ?  <button onClick={toggleEditInfo} >Edit Information</button> : null
               }
+            </div>
+             
             
         </>
     )
@@ -43,7 +43,7 @@ const ProfileOtherInfo = ( {profile, toggleEditInfo, authStatus}) => {
 export const Contact = ({ contactTitle, contactValue }) => {
     return (
        
-            <li><strong>{contactTitle}</strong>: {contactValue}</li>
+            <li><strong>{contactTitle}</strong>: {contactValue} </li>
         
     )
 }

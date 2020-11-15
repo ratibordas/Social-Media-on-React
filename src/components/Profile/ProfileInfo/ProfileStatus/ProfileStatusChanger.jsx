@@ -34,7 +34,7 @@ const ProfileStatusChanger = (props) => {
         
         editMode && !props.authStatus ?
             <input onChange={onStatusChange} autoFocus={true} onBlur={editPassive} value={status}></input> :
-            <span onDoubleClick={editActive}>{props.status ? props.status : "Where is your status?"}</span>
+            <span onDoubleClick={editActive}>Status: {props.status ? props.status : "-"}</span>
 
     )
 

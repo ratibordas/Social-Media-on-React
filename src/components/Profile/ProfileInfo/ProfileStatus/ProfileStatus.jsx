@@ -19,7 +19,11 @@ const ProfileStatus = (props) => {
 
 
     return (
-        <>
+        <div className="profile__status__wrapper">
+        <div>
+                <ProfileStatusChanger status={props.status}
+                    updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} authStatus={props.authStatus} />
+            </div>
        
             {
                 editInfo && !props.authStatus
@@ -27,12 +31,9 @@ const ProfileStatus = (props) => {
                  <ProfileOtherInfo profile={props.profile} authStatus={props.authStatus}  toggleEditInfo={() => setEditInfo(true)} />
             }
 
-            <div>
-                <ProfileStatusChanger status={props.status}
-                    updateUserStatusThunkCreator={props.updateUserStatusThunkCreator} authStatus={props.authStatus} />
-            </div>
+            
 
-        </>
+        </div>
     )
 
 

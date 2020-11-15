@@ -1,0 +1,35 @@
+@import "../App/App.scss";
+
+.login {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    .login__wrapper {
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-column: span 3; 
+        grid-row-start: 1;
+        grid-row: span 2; 
+        margin-top: 3rem;
+        margin-left: 3rem;
+        border: 1px solid $text-color-dark;
+        padding: 1rem;
+        h1,button,img, .check {
+            margin-left: 3rem;
+        }
+        
+         button {
+            margin-top: 40px;
+            padding: 0.8rem;
+            font-weight: 900;
+            outline: none;
+         }
+         .check {
+            margin-top: 20px; 
+         }
+         
+    }
+
+
+    
+}

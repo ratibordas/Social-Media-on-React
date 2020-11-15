@@ -15,9 +15,11 @@ const Pagination = ({ totalItemsCount, pageSize, currentPage, onPageChanged, por
     }
 
     return (
-        <ul className="users__pagination">
+        <nav className="users__pagination">
             {portionNumber > 1 &&
-                <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
+                <button className="users__pagination__up" onClick={() => { setPortionNumber(portionNumber - 1) }}>&#8593;</button>}
+        <ul>
+            
             {
                 pages.filter(page => page >= left && page <= right).map(page => {
                     return <li className={`users__pagination__item ${currentPage === page ? "selected" : ""}`}
@@ -25,10 +27,11 @@ const Pagination = ({ totalItemsCount, pageSize, currentPage, onPageChanged, por
                         key={page}>{page}</li>
                 })
             }
-            { portionCount > portionNumber &&
-                <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
+           
         </ul>
-
+        { portionCount > portionNumber &&
+                <button className="users__pagination__down"  onClick={() => { setPortionNumber(portionNumber + 1) }}>&#8595;</button>}
+        </nav>
     )
 
 

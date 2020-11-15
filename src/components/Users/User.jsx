@@ -24,8 +24,8 @@ const User = ({user, followingInProgress, unfollowThunkCreator, followThunkCreat
 
                 </figcaption>
             </figure>
-            <h1>{user.name}</h1>
-            <h4>{user.status}</h4>
+            <p>{user.name}</p>
+            <p>{user.status}</p>
 
 
         </li>

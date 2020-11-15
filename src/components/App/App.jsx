@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 // Components
@@ -16,23 +16,27 @@ import Loader from '../Loader/Loader';
 
 
 
-class App extends React.Component {
+const App = (props) => {
+
+  useEffect(() => {
+    props.initializedThunkCreator();
+  }, [])
 
 
-  componentDidMount() {
-    this.props.initializedThunkCreator();
+  if (!props.initialized) {
+    return <Loader />
   }
-
-  render() {
-    if (!this.props.initialized) {
-      return <Loader />
-    }
-    return (
-
+  return (
+    <>
+       <Parrallax/>
       <section className="container">
         <HeaderContainer />
         <SidebarContainer />
+        <main>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/profile" />
+          </Route>
           <Route path="/profile/:userId?"  >
             <ProfileContainer />
           </Route>
@@ -42,16 +46,36 @@ class App extends React.Component {
           <Route path="/users">
             <UsersContainer />
           </Route>
+          <Route path="/friends">
+            <div>Friends</div>
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="*">
+            <h1>404 NOT FOUND</h1>
+          </Route>
         </Switch>
-
+        </main>
       </section>
+    </>
+  )
 
-    )
-  }
 }
+
+
+const Parrallax = (props) => {
+  return (
+    <>
+       <div id="background"></div>
+      <div id="midground"></div>
+      <div id="foreground"></div>
+    </>
+  )
+
+}
+
+
 // Redux mapStateToProps
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized
